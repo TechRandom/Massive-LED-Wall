@@ -5,7 +5,7 @@ YouTube Tutorial:
 
 Written Instructions: 
 
-Download and extract the ZIP file somewhere easy to find.
+Click the green "Code" button, then "Download Zip". Extract the ZIP file somewhere easy to find.
 
 To use LMCSHD, open the LMCSHD_TechRandom_Release folder and run "LMCSHD.exe". You can right 
 click the executable and create a shortcut for easy access, just don't remove the .exe file 
