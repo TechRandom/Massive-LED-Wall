@@ -14,8 +14,7 @@ void loop() {
   for (int i = 0; i < NUM_LEDS; i++){
     leds[i].r = 100;
     FastLED.show();
-    delay(10);
     leds[i].r = 0;
-    FastLED.show();
+    delay(10);
   }
 }
