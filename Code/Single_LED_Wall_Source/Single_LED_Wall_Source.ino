@@ -19,8 +19,8 @@ WebSocketsServer webSocket = WebSocketsServer(81);
 const int NUM_LEDS = WIDTH * HEIGHT;
 char leds[NUM_LEDS * 3];
 //-----------------------------------------------
-const char* ssid = "WiFi art thou Romeo?";
-const char* password = "Never Eat Sour Watermelon";
+const char* ssid = "YOUR_SSID";
+const char* password = "YOUR_PASS";
 //-----------------------------------------------
 // Set a Static IP address
 IPAddress local_IP(192, 168, 1, 121);

@@ -14,7 +14,7 @@ ESP8266WebServer server(80);
 WebSocketsServer webSocket = WebSocketsServer(81);
 //-----------------------------------------------
 // LED Gloabals
-#define WIDTH 16
+#define WIDTH 64
 #define HEIGHT 36
 const int NUM_LEDS = WIDTH * HEIGHT;
 char panel1[NUM_LEDS * 2];
@@ -28,8 +28,8 @@ uint8_t screen2 = 99;
 uint8_t screen3 = 99;
 uint8_t screen4 = 99; 
 //-----------------------------------------------
-const char* ssid = "WiFi art thou Romeo?";
-const char* password = "Never Eat Sour Watermelon";
+const char* ssid = "YOUR_SSID";
+const char* password = "YOUR_PASS";
 //-----------------------------------------------
 // Set a Static IP address
 IPAddress local_IP(192, 168, 1, 121);
@@ -148,22 +148,22 @@ void loop() {
   // Read header from LMCSDH
   switch(Serial.read()){ 
     case 0x05: // Request for matrix definition
-      Serial.println(WIDTH * 4);
+      Serial.println(WIDTH);
       Serial.println(HEIGHT);
       break;
     case 0x42: // Read frame data
       // NUM_LEDS * (2 BYTES PER PIXEL)
-      Serial.readBytes(panel1, NUM_LEDS * 2);
-      Serial.readBytes(panel2, NUM_LEDS * 2);
-      Serial.readBytes(panel3, NUM_LEDS * 2);
-      Serial.readBytes(panel4, NUM_LEDS * 2);
+      Serial.readBytes(panel1, NUM_LEDS / 4 * 2);
+      Serial.readBytes(panel2, NUM_LEDS / 4 * 2);
+      Serial.readBytes(panel3, NUM_LEDS / 4 * 2);
+      Serial.readBytes(panel4, NUM_LEDS / 4 * 2);
       
       //Send Screen Data to the correct client
       // NUM_LEDS * (2 BYTES PER PIXEL)
-      webSocket.sendTXT(screen1, (char *)panel1, NUM_LEDS * 2);
-      webSocket.sendTXT(screen2, (char *)panel2, NUM_LEDS * 2);
-      webSocket.sendTXT(screen3, (char *)panel3, NUM_LEDS * 2);
-      webSocket.sendTXT(screen4, (char *)panel4, NUM_LEDS * 2);
+      webSocket.sendTXT(screen1, (char *)panel1, NUM_LEDS / 4 * 2);
+      webSocket.sendTXT(screen2, (char *)panel2, NUM_LEDS / 4 * 2);
+      webSocket.sendTXT(screen3, (char *)panel3, NUM_LEDS / 4 * 2);
+      webSocket.sendTXT(screen4, (char *)panel4, NUM_LEDS / 4 * 2);
 
       Serial.write(0x06); //acknowledge
       break;

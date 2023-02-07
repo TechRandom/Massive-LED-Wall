@@ -19,8 +19,8 @@ WebSocketsClient webSocket;
 const int NUM_LEDS = WIDTH * HEIGHT;
 CRGB leds[NUM_LEDS];
 //-----------------------------------------------
-const char* ssid = "WiFi art thou Romeo?";
-const char* password = "Never Eat Sour Watermelon";
+const char* ssid = "YOUR_SSID";
+const char* password = "YOUR_PASS";
 //-----------------------------------------------
 
 /*****************************************************************    
