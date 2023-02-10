@@ -1,0 +1,36 @@
+name: PlatformIO CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        example: 
+          - Code/FastLED_Test
+          - Code/LED_Wall_Reciever
+          - Code/LED_Wall_Source
+          - Code/LMCSHD_Test
+          - Code/MAX_CURRENT_TEST
+          - Code/Single_LED_Wall_Reciever
+          - Code/Single_LED_Wall_Source
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.platformio/.cache
+          key: ${{ runner.os }}-pio
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install PlatformIO Core
+        run: pip install --upgrade platformio
+      - name: Install Libraries
+        run: |
+          pio pkg install -g -l "https://github.com/FastLED/FastLED/archive/refs/heads/master.zip"
+          pio pkg install -g -l "links2004/WebSockets@^2.3.7"
+      - name: Build Sketch
+        run: pio ci --board=d1_mini
+        env:
+          PLATFORMIO_CI_SRC: ${{ matrix.example }}
