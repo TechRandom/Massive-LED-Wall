@@ -27,7 +27,9 @@ jobs:
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
       - name: Install FastLED
-        run: pio pkg install -g -l "fastled/FastLED@^3.5.0"
+        run:
+          - pio pkg install -g -l "https://github.com/FastLED/FastLED/archive/refs/heads/master.zip"
+          - pio pkg install -g -l "links2004/WebSockets@^2.3.7"
       - name: Build Sketch
         run: pio ci --board=nodemcuv2
         env:
