@@ -5,7 +5,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        example: [Code/FastLED_Test/FastLED_Test.ino]
+        example: 
+          - Code/FastLED_Test
+          - Code/LED_Wall_Reciever
+          - Code/LED_Wall_Source
+          - Code/LMCSHD_Test
+          - Code/MAX_CURRENT_TEST
+          - Code/Single_LED_Wall_Reciever
+          - Code/Single_LED_Wall_Source
     steps:
       - uses: actions/checkout@v3
       - uses: actions/cache@v3
@@ -21,7 +28,7 @@ jobs:
         run: pip install --upgrade platformio
       - name: Install FastLED
         run: pio pkg install -g -l "fastled/FastLED@^3.5.0"
-      - name: Build Sketches
+      - name: Build Sketch
         run: pio ci --board=nodemcuv2
         env:
           PLATFORMIO_CI_SRC: ${{ matrix.example }}
