@@ -26,11 +26,11 @@ jobs:
           python-version: '3.9'
       - name: Install PlatformIO Core
         run: pip install --upgrade platformio
-      - name: Install FastLED
+      - name: Install Libraries
         run: |
           pio pkg install -g -l "https://github.com/FastLED/FastLED/archive/refs/heads/master.zip"
           pio pkg install -g -l "links2004/WebSockets@^2.3.7"
       - name: Build Sketch
-        run: pio ci --board=nodemcuv2
+        run: pio ci --board=d1_mini
         env:
           PLATFORMIO_CI_SRC: ${{ matrix.example }}
