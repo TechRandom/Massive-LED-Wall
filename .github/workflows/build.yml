@@ -1,0 +1,30 @@
+name: PlatformIO CI
+
+  on: [push, pull_request]
+
+  jobs:
+    build:
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          example: [Code/FastLED_Test/FastLED_Test.ino]
+
+      steps:
+        - uses: actions/checkout@v3
+        - uses: actions/cache@v3
+          with:
+            path: |
+              ~/.cache/pip
+              ~/.platformio/.cache
+            key: ${{ runner.os }}-pio
+        - uses: actions/setup-python@v4
+          with:
+            python-version: '3.9'
+        - name: Install PlatformIO Core
+          run: pip install --upgrade platformio
+        - name: Install FastLED
+          run: pio pkg install -g -l "fastled/FastLED@^3.5.0"
+        - name: Build Sketches
+          run: pio ci --board=nodemcuv2
+          env:
+            PLATFORMIO_CI_SRC: ${{ matrix.example }}
